@@ -10,6 +10,8 @@ class ofApp : public ofBaseApp{
     ofxCvGrayscaleImage grayscale_frame; // webcam frame with colors removed - convert to monochrome frame
     ofxCvGrayscaleImage background_grayscale; // grayscaled background image used for differencing
     
+    bool hasBackground = false;
+    
 	public:
 		void setup();
 		void update();

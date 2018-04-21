@@ -8,9 +8,6 @@ void ofApp::setup(){
     color_frame.allocate(320, 240);
     grayscale_frame.allocate(320, 240);
     background_grayscale.allocate(320,240);
-    
-    // Set background image for differencing to all black pixels - automatic detection of skin & bg setting
-    background_grayscale.set(0);
 }
 
 //--------------------------------------------------------------
@@ -20,6 +17,14 @@ void ofApp::update(){
     // Check that there is a new frame to load - reduces amount of work by constant updates
     // If there is a new frame, update color and grayscaled images to continue producing a video
     if (webcam_feed.isFrameNew()){
+        // Set background image for differencing as first available frame - seemingly automatic threshholding and tracking
+        if (!hasBackground) {
+            color_frame.setFromPixels(webcam_feed.getPixels());
+            background_grayscale = color_frame;
+            hasBackground = !hasBackground;
+        }
+        
+        // Otherwise continue to get color and grayscale live feed
         color_frame.setFromPixels(webcam_feed.getPixels());
         grayscale_frame = color_frame;
     }
@@ -27,7 +32,7 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    // Display color frames/feeds on screen with one corner at (x, y)
+    // Display color frames/feeds on screen with one corner at (x, y) for 'testing'
     color_frame.draw(10, 10);
     grayscale_frame.draw(350, 10);
     background_grayscale.draw(10, 270);
