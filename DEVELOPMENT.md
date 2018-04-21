@@ -1,6 +1,6 @@
 # Understanding Image Processing and Computer Vision with OpenFrameworks
 
-_The first step involved understanding the concepts behind tracking and computer vision in OF_**.
+**_The first step involved understanding the concepts behind tracking and computer vision in OF_**.
 ## Images
 * Comprised of one-dimensional array of integers representing color
 * In OpenCv, images can come from a variety of locations (disk, webcam (ofVideoGrabber), pixels of frame from screen, etc.)
@@ -20,7 +20,7 @@ _The first step involved understanding the concepts behind tracking and computer
 * Greater difference between pixels = foreground, outline of foreground allows blobs to be formed and traced = tracking
 
 # Development and Bugs
-_The next step involved developing the program_**
+**_The next step involved developing the program_**
 ## Design Choices
 * Very little interaction between the user and the program in terms of key presses = no need for functions other than setup, update, and draw
 * Background needs to be captured with the first available frame - allows for little disruption of background and automatic thresholding and differencing with the introduction of live foreground objects (using a purely black or white background would produce flaws with different backgrounds and inaccurate results for different pixels)
