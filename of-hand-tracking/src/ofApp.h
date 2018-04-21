@@ -8,6 +8,7 @@ class ofApp : public ofBaseApp{
     
     ofxCvColorImage color_frame; // webcam frame with 3 channel colors
     ofxCvGrayscaleImage grayscale_frame; // webcam frame with colors removed - convert to monochrome frame
+    ofxCvGrayscaleImage background_grayscale; // grayscaled background image used for differencing
     
 	public:
 		void setup();

@@ -7,6 +7,10 @@ void ofApp::setup(){
     // Set sizes of each image that correspond to video feed - prevent compression errors and other bugs
     color_frame.allocate(320, 240);
     grayscale_frame.allocate(320, 240);
+    background_grayscale.allocate(320,240);
+    
+    // Set background image for differencing to all black pixels - automatic detection of skin & bg setting
+    background_grayscale.set(0);
 }
 
 //--------------------------------------------------------------
@@ -26,6 +30,7 @@ void ofApp::draw(){
     // Display color frames/feeds on screen with one corner at (x, y)
     color_frame.draw(10, 10);
     grayscale_frame.draw(350, 10);
+    background_grayscale.draw(10, 270);
 }
 
 //--------------------------------------------------------------
