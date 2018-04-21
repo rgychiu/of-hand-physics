@@ -29,3 +29,8 @@
 ## Issues
 * One problem that was encountered was using an ofVideoGrabber and attempting to convert to a grayscale webcam feed, which led to incompatible types - solved by using an image that was updated with every frame from the feed; grayscale image had an overloaded operator that led to automatic conversion
 
+# Sources
+* http://openframeworks.cc/ofBook/chapters/image_processing_computer_vision.html
+* http://openframeworks.cc/documentation/ofxOpenCv/ofxCvColorImage/
+* http://openframeworks.cc/documentation/video/ofVideoGrabber/
+* http://openframeworks.cc/documentation/ofxOpenCv/ofxCvGrayscaleImage/
