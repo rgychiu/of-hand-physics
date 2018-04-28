@@ -2,7 +2,7 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    webcam_feed.initGrabber(320, 240); // Use default capture device, window size set to 320x240 px
+    webcam_feed.initGrabber(320, 240); // Use default capture device, window size set to 320x240 px (supported size)
     
     // Set sizes of each image that correspond to video feed - prevent compression errors and other bugs
     color_frame.allocate(320, 240);
@@ -37,7 +37,7 @@ void ofApp::update(){
         // Consider 1 blob since hand (and even body) needs to be one whole region
         // Finding holes false since the outline of hand is desired
         // Want the tracked blob to be significant - large enough to distinguish from background but not entire screen
-        int minArea = abs_difference.getWidth() * abs_difference.getHeight() * 0.1;
+        int minArea = abs_difference.getWidth() * abs_difference.getHeight() * 0.05;
         int maxArea = abs_difference.getWidth() * abs_difference.getHeight() * 0.75;
         contour_finder.findContours(abs_difference, minArea, maxArea, 1, false);
     }
@@ -51,6 +51,11 @@ void ofApp::draw(){
     background_grayscale.draw(10, 270);
     abs_difference.draw(350, 270);
     contour_finder.draw();
+    
+    // Draw string instructions for better interface/usability
+    string instructions = "R: relearn background\n[: decrease threshold\n] increase threshold"
+                          "threshold.";
+    ofDrawBitmapString(instructions, 10, 530);
 }
 
 //--------------------------------------------------------------

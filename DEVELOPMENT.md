@@ -25,11 +25,14 @@
 * Very little interaction between the user and the program in terms of key presses = no need for functions other than setup, update, and draw
 * Background needs to be captured with the first available frame - allows for little disruption of background and automatic thresholding and differencing with the introduction of live foreground objects (using a purely black or white background would produce flaws with different backgrounds and inaccurate results for different pixels)
 * Sizes of images and video in the application are being allocated purely for 'testing' purposes. 'Proper' test cases can't be written because the image manipulation utilizes functions of the library, which can be trusted
+* All four frames need to be shown because of the interface of choosing to relearn the background and changing the threshold - needed for better usability.
+* The size for each window (320x240) needed to be used because there are a few sizes supported by OF.
 
 ## Progress
 * Utilizes live webcam images for tracking
 * Able to learn background and difference images
 * Tracking accomplished through contour finding
+* Basic interface incorporated
 * Box2D library implemented
 
 ## Issues
