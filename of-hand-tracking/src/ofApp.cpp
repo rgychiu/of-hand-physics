@@ -56,6 +56,14 @@ void ofApp::draw(){
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
     // Keyboard shortcuts to help with hand tracking methods
+    //Normalize key press to uppercase
+    char letter_pressed = toupper(key);
+    
+    // Relearn/reset background
+    if (letter_pressed == 'R') {
+        // Get current webcam frame and make new background
+        background_grayscale = color_frame;
+    }
 }
 
 ////--------------------------------------------------------------
