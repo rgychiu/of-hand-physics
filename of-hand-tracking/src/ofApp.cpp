@@ -31,7 +31,7 @@ void ofApp::update(){
         
         // Get absolute difference between two frames to obtain foreground and background
         abs_difference.absDiff(background_grayscale, grayscale_frame);
-        abs_difference.threshold(80);
+        abs_difference.threshold(threshold_val);
         
         // Find blobs in image
         // Consider 1 blob since hand (and even body) needs to be one whole region
@@ -57,12 +57,17 @@ void ofApp::draw(){
 void ofApp::keyPressed(int key){
     // Keyboard shortcuts to help with hand tracking methods
     //Normalize key press to uppercase
-    char letter_pressed = toupper(key);
+    char char_pressed = toupper(key);
     
-    // Relearn/reset background
-    if (letter_pressed == 'R') {
+    // Relearn/reset background - R
+    // Set threshold value - [, ]
+    if (char_pressed == 'R') {
         // Get current webcam frame and make new background
         background_grayscale = color_frame;
+    } else if (char_pressed == '[') {
+        threshold_val--;
+    } else if (char_pressed == ']') {
+        threshold_val++;
     }
 }
 

@@ -14,6 +14,7 @@ class ofApp : public ofBaseApp{
     ofxCvContourFinder contour_finder; // find, store, and trace tracked blobs/hand on the screen
     
     bool hasBackground = false;
+    int threshold_val = 50;
     
 	public:
 		void setup();
