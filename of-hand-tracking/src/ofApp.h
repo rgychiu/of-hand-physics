@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include "ofxOpenCv.h"
+#include "ofxBox2d.h"
 
 class ofApp : public ofBaseApp{
     ofVideoGrabber webcam_feed; // Use laptop webcam to get feed of pixels and updates
