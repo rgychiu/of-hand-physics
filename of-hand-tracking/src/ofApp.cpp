@@ -2,7 +2,8 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    webcam_feed.initGrabber(320, 240); // Use default capture device, window size set to 320x240 px (supported size)
+    // Use default capture device, window size set to 320x240 px (supported size)
+    webcam_feed.initGrabber(320, 240);
     
     // Set sizes of each image that correspond to video feed - prevent compression errors and other bugs
     color_frame.allocate(320, 240);
@@ -13,7 +14,7 @@ void ofApp::setup(){
     // Initialize box2d world and objects
     box2d.init();
     box2d.setGravity(0, 10);
-    box2d.createGround(0, 700, 1024, 710);
+    box2d.createGround();
 }
 
 //--------------------------------------------------------------
@@ -78,6 +79,7 @@ void ofApp::keyPressed(int key){
 
     // Relearn/reset background - R
     // Set threshold value - [, ]
+    // Delete circle object - '-'
     if (char_pressed == 'R') {
         // Get current webcam frame and make new background
         background_grayscale = color_frame;
@@ -94,6 +96,7 @@ void ofApp::keyPressed(int key){
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button) {
+    // Generate box2dCircle object, set physics and finally place in world to start moving
     auto circle = shared_ptr<ofxBox2dCircle>(new ofxBox2dCircle);
     circle->setPhysics(0.5, 0.5, 1);
     circle->setup(box2d.getWorld(), x, y, 20);
