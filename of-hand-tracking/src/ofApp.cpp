@@ -9,10 +9,17 @@ void ofApp::setup(){
     grayscale_frame.allocate(320, 240);
     background_grayscale.allocate(320, 240);
     abs_difference.allocate(320, 240);
+    
+    // Initialize box2d world and objects
+    box2d.init();
+    box2d.setGravity(0, 10);
+    box2d.createGround(0, 700, 1024, 710);
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
+    box2d.update();
+    
     // Update image with next frame/image (how videos are produced)
     webcam_feed.update();
     // Check that there is a new frame to load - reduces amount of work by constant updates
@@ -52,18 +59,23 @@ void ofApp::draw(){
     abs_difference.draw(350, 270);
     contour_finder.draw();
     
+    // Check if objects available to generate and draw
+    for (auto object : objects) {
+        object->draw();
+    }
+    
     // Draw string instructions for better interface/usability
-    string instructions = "R: relearn background\n[: decrease threshold\n] increase threshold"
-                          "threshold.";
+    string instructions = "R: relearn background\n[: decrease threshold\n] increase threshold\n"
+                          "Click to generate a circle\n-: delete circles";
     ofDrawBitmapString(instructions, 10, 530);
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
     // Keyboard shortcuts to help with hand tracking methods
-    //Normalize key press to uppercase
+    // Normalize key press to uppercase
     char char_pressed = toupper(key);
-    
+
     // Relearn/reset background - R
     // Set threshold value - [, ]
     if (char_pressed == 'R') {
@@ -73,56 +85,17 @@ void ofApp::keyPressed(int key){
         threshold_val--;
     } else if (char_pressed == ']') {
         threshold_val++;
+    } else if (char_pressed == '-') {
+        if (!objects.empty()) {
+            objects.erase(objects.begin(), objects.begin() + 1);
+        }
     }
 }
 
-////--------------------------------------------------------------
-//void ofApp::keyReleased(int key){
-//
-//}
-//
-////--------------------------------------------------------------
-//void ofApp::mouseMoved(int x, int y ){
-//
-//}
-//
-////--------------------------------------------------------------
-//void ofApp::mouseDragged(int x, int y, int button){
-//
-//}
-//
-////--------------------------------------------------------------
-//void ofApp::mousePressed(int x, int y, int button){
-//
-//}
-//
-////--------------------------------------------------------------
-//void ofApp::mouseReleased(int x, int y, int button){
-//
-//}
-//
-////--------------------------------------------------------------
-//void ofApp::mouseEntered(int x, int y){
-//
-//}
-//
-////--------------------------------------------------------------
-//void ofApp::mouseExited(int x, int y){
-//
-//}
-//
-////--------------------------------------------------------------
-//void ofApp::windowResized(int w, int h){
-//
-//}
-//
-////--------------------------------------------------------------
-//void ofApp::gotMessage(ofMessage msg){
-//
-//}
-//
-////--------------------------------------------------------------
-//void ofApp::dragEvent(ofDragInfo dragInfo){
-//
-//}
-
+//--------------------------------------------------------------
+void ofApp::mousePressed(int x, int y, int button) {
+    auto circle = shared_ptr<ofxBox2dCircle>(new ofxBox2dCircle);
+    circle->setPhysics(0.5, 0.5, 1);
+    circle->setup(box2d.getWorld(), x, y, 20);
+    objects.emplace_back(circle);
+}
