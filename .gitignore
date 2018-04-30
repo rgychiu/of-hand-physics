@@ -47,5 +47,8 @@ packages.config
 Makefile
 Project.xcconfig
 config.make
-of-hand-tracking.xcodeproj/*
+final-project-rgychiu.xcodeproj/*
 openFrameworks-Info.plist
+
+#Extra Files
+.DS_Store

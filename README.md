@@ -4,12 +4,12 @@ This project involves an application of computer vision and image processing, sp
 ## Installing
 ### Prerequisites
 This project uses OpenFrameworks and some of its addons. If not already installed, download the latest release here:
-` ` `
+```
 http://openframeworks.cc/download/
-` ` `
+```
 
 ### Setup
 First, clone the repository:
-` ` `
+```
 https://github.com/uiuc-sp18-cs126/final-project-rgychiu.git
-` ` `
+```
