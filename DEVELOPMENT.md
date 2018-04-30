@@ -36,18 +36,18 @@
 * Allow object clearing such that users can continue to add and remove objects
 
 ## Progress/Features
-[x] Utilize laptop webcam for tracking
-[x] Convert laptop feed to 1 channel feed
-[x] Capture single frame from 1 channel feed to use for background
-[x] Absolute difference 1 channel feed with background frame
-[x] Draw contours surrounding body to be tracked
-[x] Create basic interface to change different parameters without restarting program
-[x] Include Box2d addon
-[x] Create Box2d world
-[x] Include and allow creation of basic shape in window
-[x] Allow interaction between shapes and tracked contours
-[x] Confine Box2d world to webcam feed
-[x] Clean up code
+- [x] Utilize laptop webcam for tracking
+- [x] Convert laptop feed to 1 channel feed
+- [x] Capture single frame from 1 channel feed to use for background
+- [x] Absolute difference 1 channel feed with background frame
+- [x] Draw contours surrounding body to be tracked
+- [x] Create basic interface to change different parameters without restarting program
+- [x] Include Box2d addon
+- [x] Create Box2d world
+- [x] Include and allow creation of basic shape in window
+- [x] Allow interaction between shapes and tracked contours
+- [x] Confine Box2d world to webcam feed
+- [x] Clean up code
 
 ## Issues
 * One problem that was encountered was using an ofVideoGrabber and attempting to convert to a grayscale webcam feed, which led to incompatible types
