@@ -11,21 +11,31 @@ void ofApp::setup(){
     background_grayscale.allocate(320, 240);
     abs_difference.allocate(320, 240);
     
-    // Initialize box2d world and objects
+    // Initialize box2d world and objects, set gravity in world
     box2d.init();
     box2d.setGravity(0, 10);
+    
+    // Create grounds and walls of world (same as height and width of window currently)
     box2d.createGround();
+    box2d.createBounds(0,0,1024,768);
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    box2d.update();
-    
     // Update image with next frame/image (how videos are produced)
     webcam_feed.update();
     // Check that there is a new frame to load - reduces amount of work by constant updates
     // If there is a new frame, update color and grayscaled images to continue producing a video
     if (webcam_feed.isFrameNew()){
+        // Clear previous blobs and lines
+        // Temporary empty vector to clear and release memory
+        vector<ofPolyline *> temp;
+        vector<ofxBox2dEdge *> temp2d;
+        blob_edges.clear();
+        blob_edges.swap(temp);
+        contour2d.clear();
+        contour2d.swap(temp2d);
+        
         // Set background image for differencing as first available frame - seemingly automatic threshholding and tracking
         if (!hasBackground) {
             color_frame.setFromPixels(webcam_feed.getPixels());
@@ -49,6 +59,9 @@ void ofApp::update(){
         int maxArea = abs_difference.getWidth() * abs_difference.getHeight() * 0.75;
         contour_finder.findContours(abs_difference, minArea, maxArea, 1, false);
     }
+    
+    // Update box2d objects (position and velocities)
+    box2d.update();
 }
 
 //--------------------------------------------------------------
@@ -58,7 +71,13 @@ void ofApp::draw(){
     grayscale_frame.draw(350, 10);
     background_grayscale.draw(10, 270);
     abs_difference.draw(350, 270);
-    contour_finder.draw();
+    
+    // Get all points in the contour and connect together using polylines
+    generateContour(contour_finder.blobs);
+    generate2dContour(blob_edges);
+    for (auto box_outline : contour2d) {
+        box_outline->draw();
+    }
     
     // Check if objects available to generate and draw
     for (auto object : objects) {
@@ -101,4 +120,26 @@ void ofApp::mousePressed(int x, int y, int button) {
     circle->setPhysics(0.5, 0.5, 1);
     circle->setup(box2d.getWorld(), x, y, 20);
     objects.emplace_back(circle);
+}
+
+
+//--------------------------------------------------------------
+void ofApp::generateContour(vector<ofxCvBlob> blobs) {
+    // Each contour has a vector of blobs that it found
+    // Each blob has a vector of ofPoints that make up the edges of the blob
+    // ofPoints can be made into polylines which can be used for box2d & interactions
+    for (auto obj : blobs) {
+        blob_edges.emplace_back(new ofPolyline(obj.pts));
+    }
+}
+
+//--------------------------------------------------------------
+void ofApp::generate2dContour(vector<ofPolyline *> polyline_contour) {
+    // Take polylines that outline blobs and convert to box2d shapes that can interact
+    for (auto contour_line : polyline_contour) {
+        auto box_contour = new ofxBox2dEdge();
+        box_contour->addVertexes(*contour_line);
+        box_contour->create(box2d.getWorld());
+        contour2d.emplace_back(box_contour);
+    }
 }

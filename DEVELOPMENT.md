@@ -35,13 +35,14 @@
 * Basic interface incorporated
 * Box2D library implemented
 * Created basic Box2D shapes with gravity and movement on screen
+* Implemented interaction between box2d shapes and opencv tracked contours
 
 ## Issues
 * One problem that was encountered was using an ofVideoGrabber and attempting to convert to a grayscale webcam feed, which led to incompatible types - solved by using an image that was updated with every frame from the feed; grayscale image had an overloaded operator that led to automatic conversion
 * Absolute differencing produced image with background still present along with foreground in some cases
 * Global threshold inefficient for changing background or changing lighting as well as contour finding, allowing users to adjust threshold values or implementing automatic threshold selection can solve issue
 * Having program capture first available frame for background and have it be unchangeable decreases usability - users have to restart the program for a new background. Including options to relearn the background with a keypress or interface solves this problem
-* Box2d shapes are not recognizing contour outlines
+* Box2d shapes are not recognizing contour outlines - converting opencv blob outlines to box2d edges should cause interaction and solve problem
 
 # Sources
 * http://openframeworks.cc/ofBook/chapters/image_processing_computer_vision.html
