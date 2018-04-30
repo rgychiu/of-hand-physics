@@ -19,8 +19,11 @@ First, clone the repository:
 https://github.com/uiuc-sp18-cs126/final-project-rgychiu.git
 ```
 Copy the cloned repository into the `apps/myApps` folder of the OpenFrameworks directory.
+
 Open the Project Generator from the `projectGenerator` folder of the OpenFrameworks directory and select `import`.
+
 Navigate to and select the cloned repository in the myApps folder and update the project. Make sure OpenCv and Box2D are recognized addons and included in the project.
+
 Open the project in your IDE, and you should now be able to build and run the project!
 
 ## Usage
