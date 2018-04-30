@@ -22,31 +22,45 @@
 # Development and Bugs
 **_The next step involved developing the program_**
 ## Design Choices
-* Very little interaction between the user and the program in terms of key presses = no need for functions other than setup, update, and draw
-* Background needs to be captured with the first available frame - allows for little disruption of background and automatic thresholding and differencing with the introduction of live foreground objects (using a purely black or white background would produce flaws with different backgrounds and inaccurate results for different pixels)
-* Sizes of images and video in the application are being allocated purely for 'testing' purposes. 'Proper' test cases can't be written because the image manipulation utilizes functions of the library, which can be trusted
+* Very little interaction between the user and the program in terms of key presses
+   * No need for functions other than setup, update, and draw
+* Background needs to be captured with the first available frame
+   * Allows for little disruption of background and automatic thresholding and differencing with the introduction of live foreground objects (using a purely black or white background would produce flaws with different backgrounds and inaccurate results for different pixels)
+   * Still allow user to reset background in the case that the background changes
+* 'Proper' test cases can't be written because the image manipulation utilizes functions of the library, which can be trusted
 * All four frames need to be shown because of the interface of choosing to relearn the background and changing the threshold - needed for better usability.
-* The size for each window (320x240) needed to be used because there are a few sizes supported by OF.
+  * Given the ability to adjust threshold and reset backgruond, only the color and absolutely differenced frames can be shown
+     * Allows for larger Box2d world
+* The size for each window (640x480) needed to be used because there are a limited amount of sizes supported by OF.
 * Interface and resetting the background allows for just color and absolute differencing videos to only be shown
 * Allow object clearing such that users can continue to add and remove objects
 
-## Progress
-* Utilizes live webcam images for tracking
-* Able to learn background and difference images
-* Tracking accomplished through contour finding
-* Basic interface incorporated
-* Box2D library implemented
-* Created basic Box2D shapes with gravity and movement on screen
-* Implemented interaction between box2d shapes and opencv tracked contours
-* Interface redesign
-* Code debugging, cleanup
+## Progress/Features
+[x] Utilize laptop webcam for tracking
+[x] Convert laptop feed to 1 channel feed
+[x] Capture single frame from 1 channel feed to use for background
+[x] Absolute difference 1 channel feed with background frame
+[x] Draw contours surrounding body to be tracked
+[x] Create basic interface to change different parameters without restarting program
+[x] Include Box2d addon
+[x] Create Box2d world
+[x] Include and allow creation of basic shape in window
+[x] Allow interaction between shapes and tracked contours
+[x] Confine Box2d world to webcam feed
+[x] Clean up code
 
 ## Issues
-* One problem that was encountered was using an ofVideoGrabber and attempting to convert to a grayscale webcam feed, which led to incompatible types - solved by using an image that was updated with every frame from the feed; grayscale image had an overloaded operator that led to automatic conversion
+* One problem that was encountered was using an ofVideoGrabber and attempting to convert to a grayscale webcam feed, which led to incompatible types
+   * Solved by using an image that was updated with every frame from the feed; grayscale image had an overloaded operator that led to automatic conversion
 * Absolute differencing produced image with background still present along with foreground in some cases
-* Global threshold inefficient for changing background or changing lighting as well as contour finding, allowing users to adjust threshold values or implementing automatic threshold selection can solve issue
-* Having program capture first available frame for background and have it be unchangeable decreases usability - users have to restart the program for a new background. Including options to relearn the background with a keypress or interface solves this problem
-* Box2d shapes are not recognizing contour outlines - converting opencv blob outlines to box2d edges should cause interaction and solve problem
+   * Improved by using dilation, which adds a layer of pixels in an attempt to create more solid blob areas for tracking
+* Global threshold inefficient for changing background or changing lighting as well as contour finding
+   * Solved by allowing users to adjust threshold values
+   * Also leads to better usability
+* Having program capture first available frame for background and have it be unchangeable decreases usability and users have to restart the program for a new background.
+   * Including options to relearn the background with a keypress or interface solves this problem
+* Box2d shapes are not recognizing contour outlines
+   * Solved by converting opencv blob outlines to box2d edges, which interact with ofxBox2dCircle
 
 # Sources
 * http://openframeworks.cc/ofBook/chapters/image_processing_computer_vision.html
