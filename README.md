@@ -7,9 +7,29 @@ This project uses OpenFrameworks and some of its addons. If not already installe
 ```
 http://openframeworks.cc/download/
 ```
+In addition, this project uses Box2D, an extra 2D physics game engine addon that is not listed under the included addons with OpenFrameworks. If not already downloaded, it can be acquired through following the instructions at this repo:
+```
+https://github.com/vanderlin/ofxBox2d
+```
+Follow the installation instructions and make sure that the installed folder is in the addons folder of the OpenFrameworks directory.
 
 ### Setup
 First, clone the repository:
 ```
 https://github.com/uiuc-sp18-cs126/final-project-rgychiu.git
 ```
+Copy the cloned repository into the `apps/myApps` folder of the OpenFrameworks directory.
+Open the Project Generator from the `projectGenerator` folder of the OpenFrameworks directory and select `import`.
+Navigate to and select the cloned repository in the myApps folder and update the project. Make sure OpenCv and Box2D are recognized addons and included in the project.
+Open the project in your IDE, and you should now be able to build and run the project!
+
+## Usage
+The project includes a basic interface that lists the different commands available when running. Nonetheless, here are some steps to use the features of the project:
+
+When the program runs, a video along with a black and white video will appear in the window. The black and white image is the result of background subtraction between a grayscaled version of the live video and a background image, which defaults to the first frame that was available when the program started and webcam turned on.
+
+To use another background for background subtraction, position the webcam to include the new desired background and press `R`.
+
+The program will continue to attempt to highlight blobs present in the black and white video. If objects are not recognized, decreasing the threshold using `[` or increasing the threshold using `]` can help with differentiating the background from other objects that move into the frame.
+
+Even without any bodies being tracked, Box2D shapes can be created and will be contained within the video. To create a circle object, simply click anywhere in the video. To clear all the objects from the video, press `-`
