@@ -27,6 +27,8 @@
 * Sizes of images and video in the application are being allocated purely for 'testing' purposes. 'Proper' test cases can't be written because the image manipulation utilizes functions of the library, which can be trusted
 * All four frames need to be shown because of the interface of choosing to relearn the background and changing the threshold - needed for better usability.
 * The size for each window (320x240) needed to be used because there are a few sizes supported by OF.
+* Interface and resetting the background allows for just color and absolute differencing videos to only be shown
+* Allow object clearing such that users can continue to add and remove objects
 
 ## Progress
 * Utilizes live webcam images for tracking
@@ -36,6 +38,8 @@
 * Box2D library implemented
 * Created basic Box2D shapes with gravity and movement on screen
 * Implemented interaction between box2d shapes and opencv tracked contours
+* Interface redesign
+* Code debugging, cleanup
 
 ## Issues
 * One problem that was encountered was using an ofVideoGrabber and attempting to convert to a grayscale webcam feed, which led to incompatible types - solved by using an image that was updated with every frame from the feed; grayscale image had an overloaded operator that led to automatic conversion
@@ -50,3 +54,5 @@
 * http://openframeworks.cc/documentation/video/ofVideoGrabber/
 * http://openframeworks.cc/documentation/ofxOpenCv/ofxCvGrayscaleImage/
 * http://openframeworks.cc/documentation/ofxOpenCv/ofxCvContourFinder/
+* http://openframeworks.cc/documentation/graphics/ofPolyline/
+* http://openframeworks.cc/documentation/ofxOpenCv/ofxCvBlob/
