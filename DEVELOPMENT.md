@@ -61,8 +61,11 @@
    * Including options to relearn the background with a keypress or interface solves this problem
 * Box2d shapes are not recognizing contour outlines
    * Solved by converting opencv blob outlines to box2d edges, which interact with ofxBox2dCircle
+* Creating objects and interaction with contours quickly slowed program and caused crashes
+   * Solved through catching bug of not deleting pointers in vectors before clearing and swapping with empty vectors
 
 # Sources
+**_Resources and documentation that were referenced while developing the program_**
 * http://openframeworks.cc/ofBook/chapters/image_processing_computer_vision.html
 * http://openframeworks.cc/documentation/ofxOpenCv/ofxCvColorImage/
 * http://openframeworks.cc/documentation/video/ofVideoGrabber/
