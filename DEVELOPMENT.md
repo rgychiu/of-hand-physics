@@ -47,6 +47,7 @@
 - [x] Include and allow creation of basic shape in window
 - [x] Allow interaction between shapes and tracked contours
 - [x] Confine Box2d world to webcam feed
+- [ ] Resizing support/Handle unsupported video size
 - [x] Clean up code
 
 ## Issues
