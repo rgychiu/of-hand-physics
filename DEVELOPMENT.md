@@ -34,6 +34,9 @@
 * The size for each window (640x480) needed to be used because there are a limited amount of sizes supported by OF.
 * Interface and resetting the background allows for just color and absolute differencing videos to only be shown
 * Allow object clearing such that users can continue to add and remove objects
+* Sizes of each frame and other images set to match webcam feed dimensions and responsive layout
+   * Prevents errors if video size isn't supported, default set to 640x480 (common supported size, max supported size that can allow two images to fit on one screen)
+* Threshold has default value because of absolute differencing, can be changed after program runs
 
 ## Progress/Features
 - [x] Utilize laptop webcam for tracking
@@ -47,7 +50,7 @@
 - [x] Include and allow creation of basic shape in window
 - [x] Allow interaction between shapes and tracked contours
 - [x] Confine Box2d world to webcam feed
-- [ ] Resizing support/Handle unsupported video size
+- [x] Resizing support/Handle unsupported video size
 - [x] Clean up code
 
 ## Issues
@@ -64,6 +67,8 @@
    * Solved by converting opencv blob outlines to box2d edges, which interact with ofxBox2dCircle
 * Creating objects and interaction with contours quickly slowed program and caused crashes
    * Solved through catching bug of not deleting pointers in vectors before clearing and swapping with empty vectors
+* Box2d objects can be created outside of box2d world, which was set to be the same size as the webcam image size
+  * Solved by checking mouse coordinates on click
 
 # Sources
 **_Resources and documentation that were referenced while developing the program_**
@@ -74,3 +79,4 @@
 * http://openframeworks.cc/documentation/ofxOpenCv/ofxCvContourFinder/
 * http://openframeworks.cc/documentation/graphics/ofPolyline/
 * http://openframeworks.cc/documentation/ofxOpenCv/ofxCvBlob/
+* http://box2d.org/manual.pdf and ofxBox2D examples
