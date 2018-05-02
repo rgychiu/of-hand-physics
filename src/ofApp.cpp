@@ -62,7 +62,7 @@ void ofApp::draw(){
         contour2d->draw();
     }
     
-    // Check if objects available to generate and draw
+    // Check if box2d objects available to draw
     for (auto object : objects) {
         object->draw();
     }
