@@ -44,9 +44,9 @@ void ofApp::update(){
         abs_difference.dilate();
         
         // Find 1 blob since hand (and even body) should be one whole region
-        int minArea = abs_difference.getWidth() * abs_difference.getHeight() * 0.05;
-        int maxArea = abs_difference.getWidth() * abs_difference.getHeight() * 0.75;
-        contour_finder.findContours(abs_difference, minArea, maxArea, 1, false);
+        int min_area = abs_difference.getWidth() * abs_difference.getHeight() * 0.05;
+        int max_area = abs_difference.getWidth() * abs_difference.getHeight() * 0.75;
+        contour_finder.findContours(abs_difference, min_area, max_area, 1, false);
     }
 }
 
