@@ -1,4 +1,4 @@
-# CS 126 FinalProject
+# OF-Hand-Physics
 This project involves an application of computer vision and image processing, specifically with OpenCv hand tracking and Box2D, a 2D physics game engine. It allows for object tracking with any background using live video from a webcam, which is accomplished using background subtraction with one channel images in combination with contour finding and blob detection. In addition, objects can be created that collide and interact with the tracked bodies within the displayed webcam feed.
 
 ## Installing
@@ -16,7 +16,7 @@ Follow the installation instructions and make sure that the installed folder is 
 ### Setup
 First, clone the repository:
 ```
-https://github.com/uiuc-sp18-cs126/final-project-rgychiu.git
+https://github.com/rgychiu/of-hand-physics.git
 ```
 Copy the cloned repository into the `apps/myApps` folder of the OpenFrameworks directory.
 
