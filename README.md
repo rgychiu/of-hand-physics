@@ -36,3 +36,5 @@ To use another background for background subtraction, position the webcam to inc
 The program will continue to attempt to highlight blobs present in the black and white video. If objects are not recognized, decreasing the threshold using `[` or increasing the threshold using `]` can help with differentiating the background from other objects that move into the frame.
 
 Even without any bodies being tracked, Box2D shapes can be created and will be contained within the video. To create a circle object, simply click anywhere in the video. To clear all the objects from the video, press `-`
+
+**Note that it is possible that your computer's webcam does not support 640x480. If this is the case, you may need to adjust the size of the window. Otherwise, the layout should adjust based on the new width and height.**
